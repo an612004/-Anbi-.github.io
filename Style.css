@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #282c34, #1a1e24); /* Gradient background */
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+}
+
+.calculator-container {
+    perspective: 1000px; /* Added for a subtle 3D effect on hover */
+}
+
+.calculator {
+    background-color: #2f333a;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.5),
+                -15px -15px 30px rgba(70, 70, 70, 0.2);
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); 
+    width: 350px;
+    position: relative; 
+}
+
+.calculator:hover {
+    box-shadow: 20px 20px 40px rgba(0, 0, 0, 0.6),
+                -20px -20px 40px rgba(70, 70, 70, 0.3);
+    transform: translateY(-5px) rotateX(2deg) rotateY(2deg); /* Subtle lift and tilt */
+}
+
+#display {
+    width: calc(100% - 20px);
+    height: 80px; /* Slightly taller display */
+    font-size: 3em; /* Larger font for display */
+    font-weight: 300;
+    text-align: right;
+    margin-bottom: 25px; /* More space below display */
+    padding: 10px;
+    border: none;
+    border-radius: 15px; /* More rounded corners */
+    background-color: #1e2227; /* Even darker display background */
+    color: #00e676; /* Vibrant green for numbers */
+    box-sizing: border-box;
+    box-shadow: inset 8px 8px 15px rgba(0, 0, 0, 0.4),
+                inset -8px -8px 15px rgba(70, 70, 70, 0.15);
+    letter-spacing: 2px; /* Increased letter spacing */
+    line-height: 60px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    transition: all 0.3s ease;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px; /* Increased gap between buttons */
+    width: 100%;
+}
+
+.btn {
+    padding: 22px; /* Slightly larger padding */
+    font-size: 1.4em; /* Larger font for buttons */
+    border: none;
+    border-radius: 15px; /* More rounded corners */
+    background-color: #2f333a;
+    color: #e0e0e0;
+    cursor: pointer;
+    transition: all 0.25s ease-in-out; /* Smoother transition */
+    box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.4),
+                -8px -8px 16px rgba(70, 70, 70, 0.15);
+    font-weight: 500;
+    position: relative;
+    overflow: hidden;
+    transform: translateZ(0); /* For hardware acceleration */
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.1); /* Subtle hover highlight */
+    border-radius: 50%;
+    transition: width 0.3s ease, height 0.3s ease;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+}
+
+.btn:hover::before {
+    width: 150%;
+    height: 150%;
+}
+
+.btn:hover {
+    background-color: #383d45; /* Darker on hover */
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5),
+                -10px -10px 20px rgba(70, 70, 70, 0.2);
+    transform: translateY(-2px); /* Slight lift on hover */
+}
+
+.btn:active {
+    box-shadow: inset 6px 6px 12px rgba(0, 0, 0, 0.4),
+                inset -6px -6px 12px rgba(70, 70, 70, 0.15);
+    background-color: #2d3137;
+    color: #00e676;
+    transform: translateY(0); /* Back to original position */
+}
+
+/* Specific styling for AC, DE, and operators/equal button colors */
+.function {
+    color: #ff6b6b; /* Red for AC/DE */
+    font-weight: 600;
+}
+
+.operator {
+    color: #6a00ff; /* Purple for operators */
+    font-weight: 600;
+}
+
+.equal {
+    background-color: #00e676; /* Green for equal button */
+    color: #21252b; /* Dark text for equal button */
+    grid-column: span 2; /* Equal button spans two columns */
+    font-weight: 700;
+    box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.4),
+                -8px -8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.equal:hover {
+    background-color: #00d16a; /* Darker green on hover */
+}
+
+.equal:active {
+    background-color: #00c05f; /* Even darker green on active */
+    box-shadow: inset 6px 6px 12px rgba(0, 0, 0, 0.4),
+                inset -6px -6px 12px rgba(70, 70, 70, 0.15);
+    color: #1a1e24;
+}
+
+.zero-double {
+    grid-column: span 2; /* "00" button spans two columns */
+}
+
+/* Updated grid for "0" and "." buttons to be next to "00" */
+.buttons .btn:nth-child(20) { /* Adjust based on new layout */
+    grid-column: span 1;
+}
+
+.buttons .btn:nth-child(21) { /* Adjust based on new layout */
+    grid-column: span 1;
+}
